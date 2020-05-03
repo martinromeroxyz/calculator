@@ -33,3 +33,44 @@ es independiente del endpoint que invoquemos en la petición (en caso de ser nec
 
 He creado un @Component utilizando la interfaz y la implementación proporcionadas para aprovechar las ventajas 
 de la inyección de dependencias.
+
+### Operaciones
+
+Para implementar las operaciones he utilizado la interfaz funcional BinaryOperator<T>. Las operaciones se definen en un 
+HashMap donde la clave es el nombre de la operación y el valor es la lambda correspondiente. Este planteamiento permite que 
+un funcionamiento genérico y escalable. Para añadir una nueva operación solo hay que agregar una nueva entrada en el HashMap 
+correspondiente, incluyendo tanto operaciones binarias como unarias. 
+
+Por ejemplo, el producto de dos números:
+
+	operations.put("product", (a, b) -> a * b);
+	
+o el cuadrado del primer operando:
+
+	operations.put("substract", (a, b) -> a * a);
+	
+He formateado la respuesta para que los enteros aparezcan como enteros y los decimales se muestren con dos dígitos 
+después de la coma. 
+
+### Otras consideraciones
+
+He añadido un control de excepciones básico a nivel global (implementado también como un @ControllerAdvice) y test unitarios 
+para las operaciones de suma y resta sobre la capa de servicio. 
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
