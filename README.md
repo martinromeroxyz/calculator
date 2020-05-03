@@ -24,3 +24,12 @@ implementado inicialmente las operaciones *add* y *substract*.
 
 He marcado como obligatorio solo el primer operando. De esta forma la aplicación es más escalable 
 porque se podrán implementar operaciones unarias en el futuro.
+
+### TracerAPI
+
+He implementado la funcionalidad de hacer trace de la respuesta utilizando la funcionalidad proporcionada 
+en la clase TracerResponseBodyAdvice que implementa ResponseBodyAdvice<Object>. De esta forma esta funcionalidad 
+es independiente del endpoint que invoquemos en la petición (en caso de ser necesario en el futuro).
+
+He creado un @Component utilizando la interfaz y la implementación proporcionadas para aprovechar las ventajas 
+de la inyección de dependencias.
