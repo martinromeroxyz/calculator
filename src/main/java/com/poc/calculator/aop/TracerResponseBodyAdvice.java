@@ -1,4 +1,4 @@
-package com.poc.calculator.controller;
+package com.poc.calculator.aop;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
@@ -17,7 +17,7 @@ import io.corp.calculator.TracerAPI;
 public class TracerResponseBodyAdvice implements ResponseBodyAdvice<Object> {
 
 	@Autowired
-	TracerAPI tracer;
+	private TracerAPI tracer;
 
 	@Override
 	public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {

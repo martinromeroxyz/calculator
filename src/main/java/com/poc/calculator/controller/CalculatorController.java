@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 public class CalculatorController {
 	
 	@Autowired
-	CalculatorService calculatorService;
+	private CalculatorService calculatorService;
 
 	@GetMapping("/calc/{name}")
 	public ResponseEntity<Result> calc(@Valid Operation operation) {

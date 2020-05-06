@@ -2,31 +2,34 @@ package com.poc.calculator.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Spy;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.poc.calculator.component.Calculator;
 import com.poc.calculator.model.Operation;
 import com.poc.calculator.model.Result;
 
-public class CalculatorServiceTest {
+@ExtendWith(MockitoExtension.class)
+class CalculatorServiceTest {
 	
-	CalculatorService calculatorService;
+	@InjectMocks
+	private CalculatorService calculatorService;
+
+	@Spy
+	private Calculator calculator;
 	
-	@BeforeEach
-	void init() {
-		calculatorService = new CalculatorService();
-	}
-	
-	@Test
+	@Test	
 	@DisplayName("add two numbers")
 	void addTwoNumbers() {
-
+		
 		Result expected = Result.builder().result("7").build();
 		Result actual = calculatorService.operate(getOperation("add"));
 
 		assertEquals(expected, actual);
-
 	}
 	
 	@Test
