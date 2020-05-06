@@ -40,6 +40,7 @@ class CalculatorTest {
 	}
 	
 	@Test
+	@DisplayName("throws ServiceException when operation is wrong")
 	void testExpectedServiceException_whenOperationDoesNotExists() {
 	 
 	  Exception e = Assertions.assertThrows(ServiceException.class, () -> {
@@ -50,6 +51,7 @@ class CalculatorTest {
 	}
 	
 	@Test
+	@DisplayName("throws ServiceException when parameters are wrong")
 	void testExpectedServiceException_whenParamsDoesNotMatchOperation() {
 	 
 	  Exception e = Assertions.assertThrows(ServiceException.class, () -> {
