@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.poc.calculator.exceptions.ServiceException;
 import com.poc.calculator.model.Operation;
 import com.poc.calculator.model.Result;
 import com.poc.calculator.service.CalculatorService;
@@ -22,7 +23,7 @@ public class CalculatorController {
 	private CalculatorService calculatorService;
 
 	@GetMapping("/calc/{name}")
-	public ResponseEntity<Result> calc(@Valid Operation operation) {
+	public ResponseEntity<Result> calc(@Valid Operation operation) throws ServiceException {
 		
 		log.info("Started {} operation", operation.getName());
 		

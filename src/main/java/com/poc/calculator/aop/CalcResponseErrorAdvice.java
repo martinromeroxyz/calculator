@@ -7,24 +7,31 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.poc.calculator.exceptions.ErrorCode;
+import com.poc.calculator.exceptions.ServiceException;
+
 @ControllerAdvice
 public class CalcResponseErrorAdvice {
 	
-	private static final String MANDATORY_PARAMS_ERROR_CODE = "Validation error";
-	private static final String NOT_VALID_PARAMS_ERROR_CODE = "Operation error";
+	@ExceptionHandler({ RuntimeException.class, NullPointerException.class })
+	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+	public ResponseEntity<String> handle() {
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+				.body(ErrorCode.GENERIC_ERROR.getMessage());
+	}
 	
 	@ExceptionHandler(BindException.class)
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 	public ResponseEntity<String> handleBadRequest(BindException e) {
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-				.body(MANDATORY_PARAMS_ERROR_CODE);
+				.body(ErrorCode.INVALID_PARAMS_ERROR.getMessage());
 	}
-    
-	@ExceptionHandler({ RuntimeException.class, NullPointerException.class })
-	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-	public ResponseEntity<String> handle() {
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-				.body(NOT_VALID_PARAMS_ERROR_CODE);
+	
+	@ExceptionHandler({ ServiceException.class })
+	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
+	public ResponseEntity<String> handle(ServiceException e) {
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+				.body(e.getMessage());
 	}
 
 }

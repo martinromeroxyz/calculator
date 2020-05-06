@@ -10,6 +10,7 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.poc.calculator.component.Calculator;
+import com.poc.calculator.exceptions.ServiceException;
 import com.poc.calculator.model.Operation;
 import com.poc.calculator.model.Result;
 
@@ -24,7 +25,7 @@ class CalculatorServiceTest {
 	
 	@Test	
 	@DisplayName("add two numbers")
-	void addTwoNumbers() {
+	void addTwoNumbers() throws ServiceException {
 		
 		Result expected = Result.builder().result("7").build();
 		Result actual = calculatorService.operate(getOperation("add"));
@@ -34,7 +35,7 @@ class CalculatorServiceTest {
 	
 	@Test
 	@DisplayName("substract two numbers")
-	void substractTwoNumbers() {
+	void substractTwoNumbers() throws ServiceException {
 
 		Result expected = Result.builder().result("1").build();
 		Result actual = calculatorService.operate(getOperation("substract"));
